@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MYP3 Biology Quizzes</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7fb;--card:#fff;--ink:#1b2440;--mute:#6b7592;--line:#e3e8f3;--pri:#4f46e5;--ok:#16a34a;--okbg:#e8f8ee;--no:#dc2626;--nobg:#fdeceb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:20px}
+main{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:2.2rem;margin:8px 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mute);font-size:1.1rem;margin:0 0 26px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:26px;box-shadow:0 6px 24px rgba(30,40,90,.06)}
+.qc{display:flex;gap:18px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;margin-bottom:16px;cursor:pointer;transition:.15s}
+.qc:hover{transform:translateY(-2px);border-color:var(--pri)}
+.ic{font-size:2.2rem;width:64px;height:64px;border-radius:18px;background:#eef0ff;display:grid;place-items:center;flex:none}
+.qc b{font-size:1.35rem;display:block}.qc span{color:var(--mute);font-size:1rem}
+.best{margin-left:auto;font-size:1rem;color:var(--pri);font-weight:700;white-space:nowrap}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--mute);font-weight:600;margin-bottom:12px}
+.bar{height:10px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:22px}
+.bar i{display:block;height:100%;background:var(--pri);transition:.3s}
+.q{font-size:1.7rem;font-weight:700;line-height:1.3;margin:0 0 24px}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:1.3rem;font-weight:600;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:18px;padding:22px 20px;margin-bottom:14px;cursor:pointer;transition:.12s}
+.opt:hover:not(:disabled){border-color:var(--pri);background:#f7f7ff}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}.opt.no{background:var(--nobg);border-color:var(--no)}
+.opt:disabled{cursor:default}
+.btn{font:inherit;font-size:1.25rem;font-weight:700;border:0;border-radius:16px;padding:18px 26px;background:var(--pri);color:#fff;cursor:pointer;width:100%;margin-top:6px}
+.btn.g{background:#eceffa;color:var(--ink)}
+.link{background:none;border:0;font:inherit;color:var(--pri);font-weight:700;cursor:pointer;padding:0;font-size:1rem}
+.res{text-align:center}
+.stars{font-size:3.4rem;letter-spacing:6px;margin:6px 0}
+.score{font-size:4.2rem;font-weight:800;line-height:1}
+.rate{display:inline-block;font-size:1.7rem;font-weight:800;padding:12px 26px;border-radius:999px;margin:16px 0 8px}
+.msg{color:var(--mute);font-size:1.15rem;margin:0 0 22px}
+</style></head><body><main id="app"></main>
+<script>
+const Q=[
+{t:"Variation & Heredity",e:"🧬",d:[
+["Differences between individuals of the same species are called…","Variation","Heredity","Offspring"],
+["Passing traits from parents to offspring is called…","Heredity","Variation","Fertilization"],
+["A specific feature such as eye colour is a…","Trait","Gene","Nucleus"],
+["The young produced by parents are called…","Offspring","Traits","Gametes"],
+["Which part is the control centre of the cell?","Nucleus","Chromosome","Gene"],
+["A thread-like structure of tightly coiled DNA is a…","Chromosome","Trait","Cell"],
+["A section of DNA with instructions for one trait is a…","Gene","Cell","Offspring"],
+["Which order is correct?","Cell → Nucleus → Chromosome → Gene → Trait","Cell → Chromosome → Nucleus → Trait → Gene","Gene → Cell → Nucleus → Trait → Chromosome"],
+["The basic building block of all living things is the…","Cell","Gene","Trait"],
+["Where is genetic information stored?","In the nucleus","On the cell membrane","Outside the cell"],
+["Offspring from two parents are…","A unique mix of both parents","An exact copy of the mother","An exact copy of the father"],
+["Which people are almost genetically identical?","Identical twins","Brothers","Classmates"],
+["Variation comes from…","Genes, environment, or both","Only food","Only exercise"],
+["Eye colour is controlled by…","Genes","Scars","Diet"],
+["Height is influenced by…","Genes and nutrition","Only clothing","Only luck"],
+["A gene has instructions for…","One trait","All traits","No traits"],
+["Chromosomes are found inside the…","Nucleus","Trait","Offspring"],
+["Which of these is a trait?","Leaf shape","Nucleus","Chromosome"],
+["In sexual inheritance, offspring get genes from…","Both parents","Only the mother","Only the father"],
+["Chromosomes are made of…","DNA","Skin","Sugar"]]},
+{t:"Inherited vs Environmental",e:"🌍",d:[
+["Blood type is…","Inherited","Environmental","Learned"],
+["A suntan is…","Environmental","Inherited","Present from birth"],
+["Inherited variation is present…","From birth","Only in adults","After exercise"],
+["Which is passed on to the next generation?","Inherited variation","Environmental variation","A scar"],
+["Muscle size from exercise is…","Environmental","Inherited","Passed to children"],
+["Attached earlobes are…","Inherited","Environmental","Learned"],
+["A scar is…","Environmental","Inherited","Genetic"],
+["A learned accent is…","Environmental","Inherited","Genetic"],
+["Tongue-rolling ability is…","Inherited","Environmental","Learned"],
+["A widow's peak is…","Inherited","Environmental","Caused by the sun"],
+["Tattoos are…","Not passed on to children","Passed on to children","Controlled by genes"],
+["Can inherited traits usually be changed by choice?","No","Yes, easily","Yes, with exercise"],
+["Environmental variation changes…","Throughout life","Never","Only before birth"],
+["Natural hair colour is…","Inherited","Environmental","Learned"],
+["Ear piercings are…","Environmental","Inherited","Caused by a gene"],
+["Height is caused by…","Genes and environment","Only environment","Only genes"],
+["Inherited variation comes from…","Genes from parents","Surroundings","Lifestyle"],
+["A dad lifts weights. His baby will be born…","Without the extra muscle","With the same big muscles","Stronger than others"],
+["Good nutrition mainly affects…","Final height","Blood type","Eye colour"],
+["Which is NOT environmental?","Blood type","Suntan","Scar"]]},
+{t:"Continuous & Discontinuous",e:"📊",d:[
+["Continuous variation shows…","A range of values","Distinct categories","Only two options"],
+["Discontinuous variation shows…","Distinct, separate categories","An infinite range","A smooth spectrum"],
+["Height is…","Continuous","Discontinuous","Neither"],
+["Blood group (A, B, AB, O) is…","Discontinuous","Continuous","Polygenic"],
+["Weight is…","Continuous","Discontinuous","Categories"],
+["Tongue rolling (can / cannot) is…","Discontinuous","Continuous","Bell-shaped"],
+["Hand span is…","Continuous","Discontinuous","A category"],
+["Earlobe shape (free / attached) is…","Discontinuous","Continuous","Measured in cm"],
+["Continuous traits are controlled by…","Many genes plus environment","One gene","No genes"],
+["Discontinuous traits are controlled by…","One or a few genes","Many genes and environment","Only environment"],
+["Best graph for discontinuous data?","Bar chart","Histogram","Smooth curve"],
+["Bars in a bar chart…","Have gaps between them","Touch each other","Join in a line"],
+["Best graph for grouped continuous data?","Histogram","Bar chart","Pie chart"],
+["Bars in a histogram…","Touch each other","Have gaps","Are missing"],
+["Population data for a continuous trait often makes a…","Bell-shaped curve","Straight line","Square"],
+["A pie chart shows…","Proportions of groups","Gene sequences","Cell parts"],
+["Body temperature is…","Continuous","Discontinuous","Blood group"],
+["Arm span is…","Continuous","Discontinuous","A category"],
+["Eye colour categories are…","Discontinuous","Continuous","Infinite"],
+["Why are there gaps in a bar chart?","Categories are separate","Bars are tall","Data is continuous"]]},
+{t:"Reproduction & Fertilization",e:"🌱",d:[
+["Asexual reproduction needs how many parents?","1","2","3"],
+["Sexual reproduction needs how many parents?","2","1","0"],
+["Asexual offspring are…","Identical to the parent","A unique mix","Very different"],
+["The main source of genetic variation is…","Sexual reproduction","Asexual reproduction","Cloning"],
+["Sex cells are called…","Gametes","Chromosomes","Traits"],
+["The male gamete is the…","Sperm","Egg","Ovum"],
+["The female gamete is the…","Egg (ovum)","Sperm","Nucleus"],
+["Fertilization is when…","Male and female nuclei fuse","A cell splits in two","A plant is cut"],
+["Which needs a mate?","Sexual reproduction","Asexual reproduction","Neither"],
+["Which needs less energy?","Asexual reproduction","Sexual reproduction","Both the same"],
+["Which makes a large population very quickly?","Asexual reproduction","Sexual reproduction","Neither"],
+["Sexual reproduction grows a population…","More slowly","Faster","Instantly"],
+["Genetically identical offspring are called…","Clones","Gametes","Mixtures"],
+["Offspring inherit half their genes from each…","Gamete","Clone","Cutting"],
+["Asexual reproduction produces…","No new variation","A lot of variation","Mostly variation"],
+["Fertilization drives…","Variation","Cloning","Binary fission"],
+["Cutting a potato to grow new plants is…","Asexual","Sexual","Fertilization"],
+["Sexual reproduction works by…","Fusion of gametes","Simple cell division","Budding"],
+["Why does sexual reproduction need more energy?","Finding mates and making gametes","Cells just split","It doesn't"],
+["A sperm nucleus fuses with…","An egg nucleus","Another sperm","A leaf"]]},
+{t:"Asexual Types & Review",e:"🔬",d:[
+["Bacteria reproduce by…","Binary fission","Budding","Spores"],
+["Yeast reproduces by…","Budding","Regeneration","Binary fission"],
+["Hydra reproduces by…","Budding","Spore formation","Fertilization"],
+["A starfish regrowing an arm is…","Regeneration","Budding","Binary fission"],
+["Fungi reproduce by…","Spore formation","Regeneration","Fission"],
+["A potato grows new plants by…","Vegetative propagation","Spore formation","Budding"],
+["Binary fission means…","One cell splits into two","A bud grows off","Spores are released"],
+["Budding means…","A bud grows off the parent","A cell splits in two","An egg is fused"],
+["Regeneration means…","Regrowing lost body parts","Making spores","Making gametes"],
+["Spore formation means…","Tiny cells grow into new organisms","Cutting a plant","Fusing gametes"],
+["Vegetative propagation makes…","New plants from parts of a plant","Sperm and egg","Cell splits"],
+["All five types above are…","Asexual","Sexual","Fertilization"],
+["Bacteria need how many parents?","1","2","Male and female"],
+["Vegetative propagation offspring are…","Genetically identical","Unique","Mixed"],
+["The nucleus…","Stores genetic information","Makes spores","Fuses gametes"],
+["Best graph for grouped height data?","Histogram","Bar chart","Pie chart"],
+["Which is sexual reproduction?","Sperm fusing with egg","Budding in yeast","Binary fission"],
+["A scar is…","Environmental variation","Inherited variation","Passed on"],
+["Best graph for blood group data?","Bar chart","Histogram","Bell curve"],
+["The end of the cell-to-trait chain is the…","Trait","Cell","Nucleus"]]}];
+const app=document.getElementById('app');
+const best=[null,null,null,null,null];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function rating(s){
+ if(s>=18)return{n:5,l:"Excellent!",c:"#15803d",b:"#dcfce7",m:"You've mastered this topic."};
+ if(s>=15)return{n:4,l:"Great job!",c:"#0f766e",b:"#ccfbf1",m:"Very strong understanding."};
+ if(s>=12)return{n:3,l:"Good",c:"#a16207",b:"#fef9c3",m:"Solid, with a few gaps to review."};
+ if(s>=8)return{n:2,l:"Keep practising",c:"#c2410c",b:"#ffedd5",m:"Review the study guide and try again."};
+ return{n:1,l:"Needs review",c:"#b91c1c",b:"#fee2e2",m:"Re-read the notes, then retry."}}
+function home(){
+ app.innerHTML=`<h1>Biology Quizzes</h1><p class="sub">MYP3 · Variation, Inheritance & Reproduction<br>5 quizzes · 20 questions each</p>`+
+ Q.map((q,i)=>`<button class="card qc" onclick="start(${i})"><div class="ic">${q.e}</div><div><b>Quiz ${i+1}: ${q.t}</b><span>20 questions</span></div>${best[i]!=null?`<div class="best">Best ${best[i]}/20</div>`:''}</button>`).join('');
+ scrollTo(0,0)}
+let qi,items,n,score,done;
+function start(i){qi=i;items=shuf(Q[i].d).map(r=>({q:r[0],o:shuf([r[1],r[2],r[3]]),a:r[1]}));n=0;score=0;show()}
+function show(){
+ const it=items[n];done=false;
+ app.innerHTML=`<div class="top"><button class="link" onclick="home()">← Quizzes</button><span>Score ${score}</span></div>
+ <div class="top" style="margin-bottom:8px"><span>Question ${n+1} of 20</span></div>
+ <div class="bar"><i style="width:${n/20*100}%"></i></div>
+ <div class="card"><p class="q">${it.q}</p>${it.o.map((o,k)=>`<button class="opt" onclick="pick(${k})">${o}</button>`).join('')}<div id="nx"></div></div>`;
+ scrollTo(0,0)}
+function pick(k){
+ if(done)return;done=true;const it=items[n];
+ document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(it.o[j]===it.a)b.classList.add('ok');else if(j===k)b.classList.add('no')});
+ if(it.o[k]===it.a)score++;
+ document.getElementById('nx').innerHTML=`<button class="btn" onclick="next()">${n==19?'See my rating':'Next →'}</button>`}
+function next(){n++;n<20?show():finish()}
+function finish(){
+ const r=rating(score);
+ if(best[qi]==null||score>best[qi])best[qi]=score;
+ app.innerHTML=`<div class="card res"><p class="sub" style="margin:0">Quiz ${qi+1}: ${Q[qi].t}</p>
+ <div class="stars" style="color:#f59e0b">${'★'.repeat(r.n)}<span style="color:#d9dce6">${'★'.repeat(5-r.n)}</span></div>
+ <div class="score">${score}<span style="font-size:2rem;color:var(--mute)">/20</span></div>
+ <div class="rate" style="background:${r.b};color:${r.c}">${r.l}</div>
+ <p class="msg">${r.m}</p>
+ <button class="btn" onclick="start(${qi})">Try again</button>
+ <button class="btn g" style="margin-top:12px" onclick="home()">All quizzes</button></div>`;
+ scrollTo(0,0)}
+home();
+</script></body></html>
